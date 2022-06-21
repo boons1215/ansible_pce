@@ -1,0 +1,55 @@
+---
+- name: "Creating org and adding first user with illumio-pce-db-management"
+  environment:
+    ILO_PASSWORD: "{{ pce_ui_password }}"
+  shell:
+    cmd: "{ echo $ILO_PASSWORD; echo $ILO_PASSWORD; } | sudo -u ilo-pce illumio-pce-db-management create-domain --user-name {{ pce_ui_username }} --full-name '{{ pce_ui_username }}' --org-name '{{ org_name }}'"
+  register: create_domain_result
+  failed_when: create_domain_result.rc != 0
+
+- name: "Copy VEN bundle - '{{ ven_bundle_software }}' to /tmp"
+  copy:
+    src: ./roles/9_setup_user_venlib/files/{{ ven_bundle_software }}
+    dest: /tmp
+  when: ven_bundle_software != ''
+
+- name: "Check VEN bundle - '{{ ven_bundle_software }}' already copied"
+  stat:
+    path: /tmp/{{ ven_bundle_software }}
+  register: file_exist
+
+- name: "Copy VEN compatibility matrix - '{{ ven_compatibility_matrix }}' to /tmp"
+  copy:
+    src: ./roles/9_setup_user_venlib/files/{{ ven_compatibility_matrix }}
+    dest: /tmp
+  when: ven_compatibility_matrix != ''
+
+- name: "Check VEN compatibility matrix - '{{ ven_compatibility_matrix }}' already copied"
+  stat:
+    path: /tmp/{{ ven_compatibility_matrix }}
+  register: file_exist2
+
+- name: "Install VEN bundle"
+  shell:
+    cmd: yes yes | sudo -u ilo-pce illumio-pce-ctl ven-software-install /tmp/{{ ven_bundle_software }} --compatibility-matrix /tmp/{{ ven_compatibility_matrix }} --default
+  when: file_exist.stat.exists and file_exist2.stat.exists
+  register: install_ven
+  failed_when: install_ven.rc > 0
+  until: install_ven.rc == 0
+
+- name: "Validation: Login with Username and Password"
+  uri:
+    url: "https://{{ pce_fqdn_name }}.{{ pce_domain_name }}:{{ front_end_management_https_port }}/api/v2/login_users/authenticate?pce_fqdn={{ pce_fqdn_name }}.{{ pce_domain_name }}"
+    method: POST
+    headers:
+      Content-Type: "application/json"
+    user: "{{ pce_ui_username }}"
+    password: "{{ pce_ui_password }}"
+    force_basic_auth: yes
+    status_code: 201
+    body_format: json
+  no_log: true
+  register: login_data
+  until: login_data.status == 201
+  retries: 5
+  delay: 15

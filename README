@@ -1,0 +1,4 @@
+ansible-playbook -i hosts pce-build/site.yml -u centos --private-key wwest-default -e "@main-vars.yml"
+
+
+ansible-playbook -i hosts pce-remove/site.yml -u centos --private-key wwest-default

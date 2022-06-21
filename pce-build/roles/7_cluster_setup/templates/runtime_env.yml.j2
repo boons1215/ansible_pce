@@ -1,0 +1,25 @@
+# PCE runtime_env.yml
+install_root: "/opt/illumio-pce"
+runtime_data_root: "/var/lib/illumio-pce/runtime"
+persistent_data_root: "/var/lib/illumio-pce/data"
+ephemeral_data_root: "/var/lib/illumio-pce/tmp"
+log_dir: "/var/log/illumio-pce"
+private_key_cache_dir: "/var/lib/illumio-pce/keys"
+pce_fqdn: {{ pce_fqdn_name }}.{{ pce_domain_name }}
+service_discovery_fqdn: {{ core0_hostname }}.{{ pce_domain_name }}
+cluster_public_ips:
+  cluster_fqdn:
+{% for ip in hostvars[inventory_hostname]['groups']['corenodes'] %}
+  - {{ ip }}
+{% endfor %}
+{% if load_balancer_ip %}
+  - {{ load_balancer_ip }}
+{% endif %}
+node_type: {{ node_type }}
+cluster_type: {{ cluster_type }}
+front_end_management_https_port: {{ front_end_management_https_port }}
+web_service_private_key: "/var/lib/illumio-pce/cert/server.key"
+web_service_certificate: "/var/lib/illumio-pce/cert/server.crt"
+email_address: no-reply@{{ pce_domain_name }}
+email_display_name: no-reply
+service_discovery_encryption_key: {{ service_discovery_encryption_key }}

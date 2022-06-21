@@ -1,0 +1,96 @@
+---
+- name: "Stop iptables service"
+  service:
+    name: iptables
+    state: stopped
+    enabled: false
+  ignore_errors: True
+
+- name: "Stop firewalld service"
+  service:
+    name: firewalld
+    state: stopped
+    enabled: false
+  ignore_errors: True
+
+- name: "Put SELinux in permissive mode"
+  ansible.posix.selinux:
+    policy: targeted
+    state: permissive
+
+- name: "Get current locale and language configuration"
+  command: localectl status
+  register: locale_status
+  changed_when: false
+
+- name: "Parse 'LANG' from current locale and language configuration"
+  set_fact:
+    locale_lang: "{{ locale_status.stdout | regex_search('LANG=([^\n]+)', '\\1') | first }}"
+
+- name: "Configure locale to '{{ config_system_locale }}'"
+  command: localectl set-locale LANG={{ config_system_locale }}
+  changed_when: locale_lang != config_system_locale
+
+- name: "Set /etc/environment"
+  blockinfile:
+    dest: /etc/environment
+    block: |
+      LANG="{{ config_system_locale }}"
+      LC_ALL="{{ config_system_locale }}"
+
+- name: "Copy root CA certs to /etc/pki/ca-trust/source/anchors/"
+  copy:
+    src: ./roles/2_precheck/files/{{ root_ca_cert }}
+    dest: /etc/pki/ca-trust/source/anchors/
+    mode: 0400
+  when: root_ca_cert != ''
+
+- name: "Copy intermediate CA certs to /etc/pki/ca-trust/source/anchors/"
+  copy:
+    src: ./roles/2_precheck/files/{{ intermediate_ca_cert }}
+    dest: /etc/pki/ca-trust/source/anchors/
+    mode: 0400
+  when: intermediate_ca_cert != ''
+
+- name: "Update-ca-trust force-enable"
+  command: update-ca-trust force-enable
+
+- name: "Update-ca-trust extract"
+  command: update-ca-trust extract
+
+- name: "Ensure NTP service is enabled (use default in /etc/ntp.conf)"
+  service:
+    name: ntpd
+    state: restarted
+    enabled: True
+
+- name: "Make sure Chrony is started up"
+  service:
+    name: chronyd
+    state: started
+    enabled: True
+
+- name: "Set timezone '{{ timezone }}'"
+  shell: timedatectl set-timezone {{ timezone }}
+
+- name: "Check RPM file - '{{ pce_rpm_software }}' already copied"
+  stat:
+    path: /tmp/{{ pce_rpm_software }}
+  register: file_exist
+
+- name: "Copy PCE RPM - '{{ pce_rpm_software }}' to /tmp"
+  copy:
+    src: ./roles/2_precheck/files/{{ pce_rpm_software }}
+    dest: /tmp
+  when: pce_rpm_software != '' and not file_exist.stat.exists
+
+- name: "Install PCE RPM - '{{ pce_rpm_software }}'"
+  yum:
+    name: "/tmp/{{ pce_rpm_software }}"
+    state: latest
+
+- name: "Make sure PCE RPM has installed"
+  command: rpm -q illumio-pce
+  register: illumio_installed
+  failed_when: illumio_installed.rc != 0
+  changed_when: False

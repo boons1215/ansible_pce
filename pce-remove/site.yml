@@ -1,0 +1,6 @@
+---
+- name: "PCE cluster stop"
+  hosts: allnodes
+  become: True
+  roles:
+    - pce-uninstall

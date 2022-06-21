@@ -1,0 +1,78 @@
+---
+- name: "Copy private key to /var/lib/illumio-pce/cert/, rename to server.crt"
+  copy:
+    src: "{{ server_bundle_cert }}"
+    dest: /var/lib/illumio-pce/cert/server.crt
+    owner: root
+    group: root
+    mode: 0644
+
+- name: "Copy cert bundle to /var/lib/illumio-pce/cert/, rename to server.key"
+  copy:
+    src: "{{ server_private_key }}"
+    dest: /var/lib/illumio-pce/cert/server.key
+    owner: root
+    group: root
+    mode: 0644
+
+- name: "Set node hostname which defined in the host inventory"
+  ansible.builtin.hostname:
+    name: "{{ hostname }}"
+
+- name: "Update /etc/hosts to include all nodes"
+  blockinfile:
+    path: /etc/hosts
+    create: yes
+    block: |
+      {% for item in ansible_play_batch %}
+      {{ item }}   {{ hostvars[item].hostname }}  {{ hostvars[item].hostname }}.{{ pce_domain_name }}
+      {% endfor %}
+
+- name: "Set fact variable - node type 'core'"
+  set_fact:
+    node_type: "core"
+  when: (item in ["core0","core1","core2","core3"])
+  with_items: "{{ hostvars[inventory_hostname]['group_names'] }}"
+
+- name: "Set fact variable - node type 'data'"
+  set_fact:
+    node_type: "{{ item }}"
+  when: (item in ["data0","data1"])
+  with_items: "{{ hostvars[inventory_hostname]['group_names'] }}"
+
+- name: "Copy runtime_env.yml template to PCE"
+  template:
+    src: runtime_env.yml.j2
+    dest: /etc/illumio-pce/runtime_env.yml
+    owner: ilo-pce
+    group: root
+    mode: 0640
+
+- name: "Running illumio-pce-env check before starting cluster"
+  command: sudo -u ilo-pce illumio-pce-env check
+  register: envcheck
+  changed_when: False
+  failed_when: envcheck.rc != 0
+
+- name: "Running illumio-pce-ctl status to check init runlevel"
+  command: sudo -u ilo-pce illumio-pce-ctl status -x
+  register: pce_status
+  failed_when: pce_status.rc != 3
+  changed_when: False
+  when: envcheck.rc == 0
+
+- name: "Start PCE runlevel 1"
+  command: sudo -u ilo-pce illumio-pce-ctl start --runlevel 1
+  poll: 0
+  async: 10
+
+- name: "Wait for the PCE to start as runlevel 1"
+  command: sudo -u ilo-pce illumio-pce-ctl status -w
+  register: pce_l1_status
+  until: pce_l1_status.rc == 1
+  failed_when: pce_l1_status.rc > 1
+  retries: 3
+  delay: 10
+
+- name: "Reload daemon and restart service"
+  command: systemctl daemon-reload & systemctl restart illumio-pce.service

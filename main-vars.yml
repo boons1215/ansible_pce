@@ -1,0 +1,31 @@
+{
+  # Remember to copy the files to pce-build/roles/1_common/files
+  "root_ca_cert": "root.illumioeval.com.crt",
+  "intermediate_ca_cert": "intermediate.illumioeval.com.crt", # leave empty if not exist
+  "pce_rpm_software": "illumio-pce-21.5.30-1155.c6.x86_64.rpm",
+
+  # Remember to copy the files to pce-build/roles/3_ui_install/files
+  "pce_ui_rpm_software": "illumio-pce-ui-21.5.30.UI1-690.x86_64.rpm",
+
+  # Remember to copy the files to pce-build/roles/9_usersetup_venlib/files
+  "ven_bundle_software": "illumio-ven-bundle-21.5.30-8527.tar.bz2",
+  "ven_compatibility_matrix": "illumio-release-compatibility-20-186.tar.bz2",
+
+  # Remember to copy the files to pce-build/7_cluster_setup/files
+  "server_bundle_cert": "pce.illumioeval.com.bundle.crt",
+  "server_private_key": "pce.illumioeval.com.key",
+
+  # Update the parameters
+  "config_system_locale": "en_US.UTF-8", # OR, en_GB.UFT-8
+  "timezone": "Asia/Singapore", # Asia/Tokyo, Australia/Sydney
+  "pce_fqdn_name": "pce",
+  "pce_domain_name": "illumioeval.com",
+  "cluster_type": "4node_v0", # 6node_v0
+  "front_end_management_https_port": "9443",
+  "core0_hostname": "c0",
+  "service_discovery_encryption_key": "NKTBablYq3aWz0Pjvw9nGQ==",
+  "load_balancer_ip": "", # leave empty if not using
+  "pce_ui_username": "support@illumioeval.com",
+  "pce_ui_password": "Illumio1",
+  "org_name": "illumioeval",
+}

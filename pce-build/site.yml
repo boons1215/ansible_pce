@@ -1,0 +1,65 @@
+---
+- name: "Check OS version and package dependencies"
+  hosts: allnodes
+  become: True
+  roles:
+    - 1_common
+
+- name: "Install PCE RPM, set hostname, stop firewalld, copy certs, set locale and enable ntp"
+  gather_facts: False
+  hosts: allnodes
+  become: True
+  roles:
+    - 2_precheck
+
+- name: "Install PCE-UI RPM on core nodes"
+  gather_facts: False
+  hosts: corenodes
+  become: True
+  roles:
+    - 3_ui_install
+
+- name: "Set and Verify Process and File Limits with systemd"
+  gather_facts: False
+  hosts: allnodes
+  become: True
+  roles:
+    - 4_set_systemd
+
+- name: "Set OS kernel parameters for Core nodes"
+  gather_facts: False
+  hosts: corenodes
+  become: True
+  roles:
+    - 5_set_kernel_core
+
+- name: "Set OS kernel parameters for data nodes"
+  gather_facts: False
+  hosts: datanodes
+  become: True
+  roles:
+    - 6_set_kernel_data
+
+- name: "PCE cluster setup"
+  gather_facts: False
+  hosts: allnodes
+  become: True
+  any_errors_fatal: True # stop the playbook if there are any errors
+  roles:
+    - 7_cluster_setup
+
+- name: "Bring up DB and set runlevel 5"
+  gather_facts: False
+  hosts: data0
+  become: True
+  any_errors_fatal: True # stop the playbook if there are any errors
+  roles:
+    - 8_setup_db
+
+- name: "Setup first local user"
+  gather_facts: False
+  hosts: core0
+  become: True
+  any_errors_fatal: True # stop the playbook if there are any errors
+  roles:
+    - 9_setup_user_venlib
