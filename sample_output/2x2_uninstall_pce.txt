@@ -1,0 +1,59 @@
+❯ ansible-playbook -i hosts pce-remove/site.yml -u centos --private-key wwest-default
+
+
+PLAY [***** ALL NODES: Uninstall and remove PCE software and files] ***********************************************************************************************************************************************
+
+TASK [Gathering Facts] ********************************************************************************************************************************************************************************************
+ok: [172.16.3.234]
+ok: [172.16.3.236]
+ok: [172.16.3.237]
+ok: [172.16.3.235]
+
+TASK [UNINSTALL : Stopping PCE] ***********************************************************************************************************************************************************************************
+[WARNING]: Unable to use /.ansible/tmp as temporary directory, failing back to system: [Errno 13] Permission denied: '/.ansible'
+changed: [172.16.3.237]
+changed: [172.16.3.236]
+changed: [172.16.3.235]
+changed: [172.16.3.234]
+
+TASK [UNINSTALL : Waiting for PCE to stop] ************************************************************************************************************************************************************************
+changed: [172.16.3.234]
+changed: [172.16.3.237]
+changed: [172.16.3.236]
+changed: [172.16.3.235]
+
+TASK [UNINSTALL : Uninstall the UI RPM] ***************************************************************************************************************************************************************************
+ok: [172.16.3.236]
+ok: [172.16.3.237]
+changed: [172.16.3.234]
+changed: [172.16.3.235]
+
+TASK [UNINSTALL : Uninstall the PCE RPM] **************************************************************************************************************************************************************************
+changed: [172.16.3.237]
+changed: [172.16.3.234]
+changed: [172.16.3.236]
+changed: [172.16.3.235]
+
+TASK [UNINSTALL : Clean up directories] ***************************************************************************************************************************************************************************
+changed: [172.16.3.234] => (item=/var/lib/illumio-pce/)
+changed: [172.16.3.235] => (item=/var/lib/illumio-pce/)
+changed: [172.16.3.236] => (item=/var/lib/illumio-pce/)
+changed: [172.16.3.237] => (item=/var/lib/illumio-pce/)
+changed: [172.16.3.234] => (item=/var/log/illumio-pce/)
+changed: [172.16.3.235] => (item=/var/log/illumio-pce/)
+changed: [172.16.3.237] => (item=/var/log/illumio-pce/)
+changed: [172.16.3.236] => (item=/var/log/illumio-pce/)
+changed: [172.16.3.234] => (item=/etc/illumio-pce)
+changed: [172.16.3.235] => (item=/etc/illumio-pce)
+changed: [172.16.3.237] => (item=/etc/illumio-pce)
+changed: [172.16.3.236] => (item=/etc/illumio-pce)
+ok: [172.16.3.234] => (item=/opt/illumio-pce)
+ok: [172.16.3.235] => (item=/opt/illumio-pce)
+^@ok: [172.16.3.237] => (item=/opt/illumio-pce)
+ok: [172.16.3.236] => (item=/opt/illumio-pce)
+
+PLAY RECAP ********************************************************************************************************************************************************************************************************
+172.16.3.234               : ok=6    changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+172.16.3.235               : ok=6    changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+172.16.3.236               : ok=6    changed=4    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+172.16.3.237               : ok=6    changed=4    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0

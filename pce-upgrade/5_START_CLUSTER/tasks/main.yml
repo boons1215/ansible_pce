@@ -6,7 +6,8 @@
   failed_when: envcheck.rc != 0
 
 - name: "Start PCE runlevel 1"
-  command: sudo -u ilo-pce illumio-pce-ctl start --runlevel 1
+  shell:
+    cmd: yes yes | sudo -u ilo-pce illumio-pce-ctl restart --runlevel 1
   poll: 0
   async: 10
 

@@ -6,36 +6,42 @@
     - 1_DB_BACKUP
 
 - name: ">>>>>>>> ALL NODES: Stop the PCE cluster services and transfer the RPM to /tmp"
+  gather_facts: False
   hosts: allnodes
   become: True
   roles:
     - 2_COMMON
 
 - name: ">>>>>>>> CORE NODES: Upgrade PCE and PCE-UI software"
+  gather_facts: False
   hosts: corenodes
   become: True
   roles:
     - 3_CORE_UPGRADE
 
 - name: ">>>>>>>> DATA NODES: Upgrade PCE software"
+  gather_facts: False
   hosts: datanodes
   become: True
   roles:
     - 4_DATA_UPGRADE
 
 - name: ">>>>>>>> ALL NODES: Start PCE Cluster as runlevel 1"
+  gather_facts: False
   hosts: allnodes
   become: True
   roles:
     - 5_START_CLUSTER
 
 - name: ">>>>>>>> DATA 0: DB migration and set runlevel 5"
+  gather_facts: False
   hosts: data0
   become: True
   roles:
     - 6_MIGRATE_DB
 
 - name: ">>>>>>>> CORE 0: Upgrade VEN bundle and validate the cluster service"
+  gather_facts: False
   hosts: core0
   become: True
   roles:
