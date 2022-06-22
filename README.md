@@ -28,18 +28,18 @@
 # 4. Command sample:
 - For Uninstall PCE
 Eg:
-With SSH Private Key: 
-ansible-playbook -i hosts pce-remove/site.yml -u centos --private-key wwest-default
+  - With SSH Private Key: 
+    - ansible-playbook -i hosts pce-remove/site.yml -u centos --private-key wwest-default
 
-With SSH Keyless: 
-ansible-playbook -i hosts pce-remove/site.yml -u centos
+  - With SSH Keyless: 
+    - ansible-playbook -i hosts pce-remove/site.yml -u centos
 
 - For Setup PCE Cluster
 Eg:
-With SSH Private Key: 
-ansible-playbook -i hosts pce-build/site.yml -u centos --private-key wwest-default -e "@setup-vars.yml"
+  - With SSH Private Key: 
+    - ansible-playbook -i hosts pce-build/site.yml -u centos --private-key wwest-default -e "@setup-vars.yml"
 
 - For Upgrade PCE Cluster
 Eg:
-With SSH Private Key: 
-ansible-playbook -i hosts pce-build/site.yml -u centos --private-key wwest-default -e "@upgrade-vars.yml"
+  - With SSH Private Key: 
+    - ansible-playbook -i hosts pce-build/site.yml -u centos --private-key wwest-default -e "@upgrade-vars.yml"
