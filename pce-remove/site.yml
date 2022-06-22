@@ -1,6 +1,6 @@
 ---
-- name: "PCE cluster stop"
+- name: "***** ALL NODES: Uninstall and remove PCE software and files"
   hosts: allnodes
   become: True
   roles:
-    - pce-uninstall
+    - UNINSTALL

@@ -1,19 +1,19 @@
 ---
 - name: "Copy private key to /var/lib/illumio-pce/cert/, rename to server.crt"
   copy:
-    src: "{{ server_bundle_cert }}"
+    src: ../../files/{{ server_bundle_cert }}
     dest: /var/lib/illumio-pce/cert/server.crt
     owner: root
     group: root
-    mode: 0644
+    mode: 0640
 
 - name: "Copy cert bundle to /var/lib/illumio-pce/cert/, rename to server.key"
   copy:
-    src: "{{ server_private_key }}"
+    src: ../../files/{{ server_private_key }}
     dest: /var/lib/illumio-pce/cert/server.key
     owner: root
     group: root
-    mode: 0644
+    mode: 0640
 
 - name: "Set node hostname which defined in the host inventory"
   ansible.builtin.hostname:
@@ -25,7 +25,13 @@
     create: yes
     block: |
       {% for item in ansible_play_batch %}
+      {% if loop.first %}
+      {{ item }}   {{ hostvars[item].hostname }}  {{ hostvars[item].hostname }}.{{ pce_domain_name }} {{ pce_fqdn_name }}.{{ pce_domain_name }}
+      {% elif loop.index0 == 1 %}
+      {{ item }}   {{ hostvars[item].hostname }}  {{ hostvars[item].hostname }}.{{ pce_domain_name }} {{ pce_fqdn_name }}.{{ pce_domain_name }}
+      {% else %}
       {{ item }}   {{ hostvars[item].hostname }}  {{ hostvars[item].hostname }}.{{ pce_domain_name }}
+      {% endif %}
       {% endfor %}
 
 - name: "Set fact variable - node type 'core'"
@@ -73,6 +79,3 @@
   failed_when: pce_l1_status.rc > 1
   retries: 3
   delay: 10
-
-- name: "Reload daemon and restart service"
-  command: systemctl daemon-reload & systemctl restart illumio-pce.service

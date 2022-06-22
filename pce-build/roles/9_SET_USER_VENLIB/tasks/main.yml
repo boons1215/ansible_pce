@@ -9,7 +9,7 @@
 
 - name: "Copy VEN bundle - '{{ ven_bundle_software }}' to /tmp"
   copy:
-    src: ./roles/9_setup_user_venlib/files/{{ ven_bundle_software }}
+    src: ../../files/{{ ven_bundle_software }}
     dest: /tmp
   when: ven_bundle_software != ''
 
@@ -20,7 +20,7 @@
 
 - name: "Copy VEN compatibility matrix - '{{ ven_compatibility_matrix }}' to /tmp"
   copy:
-    src: ./roles/9_setup_user_venlib/files/{{ ven_compatibility_matrix }}
+    src: ../../files/{{ ven_compatibility_matrix }}
     dest: /tmp
   when: ven_compatibility_matrix != ''
 

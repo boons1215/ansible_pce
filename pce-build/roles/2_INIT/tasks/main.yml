@@ -40,14 +40,14 @@
 
 - name: "Copy root CA certs to /etc/pki/ca-trust/source/anchors/"
   copy:
-    src: ./roles/2_precheck/files/{{ root_ca_cert }}
+    src: ../../files/{{ root_ca_cert }}
     dest: /etc/pki/ca-trust/source/anchors/
     mode: 0400
   when: root_ca_cert != ''
 
 - name: "Copy intermediate CA certs to /etc/pki/ca-trust/source/anchors/"
   copy:
-    src: ./roles/2_precheck/files/{{ intermediate_ca_cert }}
+    src: ../../files/{{ intermediate_ca_cert }}
     dest: /etc/pki/ca-trust/source/anchors/
     mode: 0400
   when: intermediate_ca_cert != ''
@@ -80,7 +80,7 @@
 
 - name: "Copy PCE RPM - '{{ pce_rpm_software }}' to /tmp"
   copy:
-    src: ./roles/2_precheck/files/{{ pce_rpm_software }}
+    src: ../../files/{{ pce_rpm_software }}
     dest: /tmp
   when: pce_rpm_software != '' and not file_exist.stat.exists
 

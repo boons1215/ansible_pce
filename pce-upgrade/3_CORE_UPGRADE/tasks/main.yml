@@ -1,0 +1,7 @@
+---
+- name: "Upgrade PCE RPM - '{{ pce_rpm_software }}' on Core nodes"
+  yum:
+    name:
+      - "/tmp/{{pce_rpm_software}}"
+      - "/tmp/{{pce_ui_rpm_software}}"
+    state: latest

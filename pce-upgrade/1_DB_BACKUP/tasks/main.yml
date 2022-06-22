@@ -1,0 +1,5 @@
+---
+- name: "Backup PCE DB to {{ backup_directory }}"
+  command: sudo -u ilo-pce illumio-pce-db-management dump --file {{ backup_directory }}
+  register: backup_status
+  failed_when: backup_status.rc != 0

@@ -1,0 +1,19 @@
+---
+- name: "Running illumio-pce-env check before starting cluster"
+  command: sudo -u ilo-pce illumio-pce-env check
+  register: envcheck
+  changed_when: False
+  failed_when: envcheck.rc != 0
+
+- name: "Start PCE runlevel 1"
+  command: sudo -u ilo-pce illumio-pce-ctl start --runlevel 1
+  poll: 0
+  async: 10
+
+- name: "Wait for the PCE to start as runlevel 1"
+  command: sudo -u ilo-pce illumio-pce-ctl status -w
+  register: pce_l1_status
+  until: pce_l1_status.rc == 1
+  failed_when: pce_l1_status.rc > 1
+  retries: 3
+  delay: 10

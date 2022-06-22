@@ -1,0 +1,19 @@
+---
+- name: "Migrate the database to the latest schema version"
+  command: sudo -u ilo-pce illumio-pce-db-management migrate
+  register: envcheck
+  changed_when: False
+  failed_when: envcheck.rc != 0
+
+- name: "Set runlevel 5"
+  command: sudo -u ilo-pce illumio-pce-ctl set-runlevel 5
+  poll: 0
+  async: 10
+
+- name: "Wait for the PCE to start as runlevel 5"
+  command: sudo -u ilo-pce illumio-pce-ctl status -w
+  register: pce_l5_status
+  until: pce_l5_status.rc == 1
+  failed_when: pce_l5_status.rc > 1
+  retries: 3
+  delay: 10

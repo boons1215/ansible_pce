@@ -1,65 +1,65 @@
 ---
-- name: "Check OS version and package dependencies"
+- name: ">>>>>>>> ALL NODES: Check OS version and package dependencies"
   hosts: allnodes
   become: True
   roles:
-    - 1_common
+    - 1_COMMON
 
-- name: "Install PCE RPM, set hostname, stop firewalld, copy certs, set locale and enable ntp"
+- name: ">>>>>>>> ALL NODES: Install PCE RPM, set hostname, stop firewalld, copy certs, set locale and enable ntp"
   gather_facts: False
   hosts: allnodes
   become: True
   roles:
-    - 2_precheck
+    - 2_INIT
 
-- name: "Install PCE-UI RPM on core nodes"
+- name: ">>>>>>>> CORE NODES: Install PCE-UI RPM"
   gather_facts: False
   hosts: corenodes
   become: True
   roles:
-    - 3_ui_install
+    - 3_PCE-UI_INSTALL
 
-- name: "Set and Verify Process and File Limits with systemd"
+- name: ">>>>>>>> ALL NODES: Set and Verify Process and File Limits with systemd"
   gather_facts: False
   hosts: allnodes
   become: True
   roles:
-    - 4_set_systemd
+    - 4_SET_SYSTEMD
 
-- name: "Set OS kernel parameters for Core nodes"
+- name: ">>>>>>>> CORE NODES: Set OS kernel parameters"
   gather_facts: False
   hosts: corenodes
   become: True
   roles:
-    - 5_set_kernel_core
+    - 5_SET_KERNEL_CORE
 
-- name: "Set OS kernel parameters for data nodes"
+- name: ">>>>>>>> DATA NODES: Set OS kernel parameters"
   gather_facts: False
   hosts: datanodes
   become: True
   roles:
-    - 6_set_kernel_data
+    - 6_SET_KERNEL_DATA
 
-- name: "PCE cluster setup"
+- name: ">>>>>>>> ALL NODES: PCE cluster setup"
   gather_facts: False
   hosts: allnodes
   become: True
   any_errors_fatal: True # stop the playbook if there are any errors
   roles:
-    - 7_cluster_setup
+    - 7_CLUSTER_SETUP
 
-- name: "Bring up DB and set runlevel 5"
+- name: ">>>>>>>> DATA 0: Bring up DB and set runlevel 5"
   gather_facts: False
   hosts: data0
   become: True
   any_errors_fatal: True # stop the playbook if there are any errors
   roles:
-    - 8_setup_db
+    - 8_INIT_DB
 
-- name: "Setup first local user"
+- name: ">>>>>>>> CORE 0: Setup first local user, install VEN library bundle and validate the cluster service"
   gather_facts: False
   hosts: core0
   become: True
   any_errors_fatal: True # stop the playbook if there are any errors
   roles:
-    - 9_setup_user_venlib
+    - 9_SET_USER_VENLIB

@@ -6,7 +6,7 @@
 
 - name: "Copy PCE-UI RPM - '{{ pce_ui_rpm_software }}' to /tmp"
   copy:
-    src: ./roles/3_ui_install/files/{{ pce_ui_rpm_software }}
+    src: ../../files/{{ pce_ui_rpm_software }}
     dest: /tmp
   when: pce_ui_rpm_software != '' and not file_exist.stat.exists
 

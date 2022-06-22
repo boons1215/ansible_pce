@@ -1,0 +1,11 @@
+---
+- name: "Copy PCE RPM - '{{ pce_rpm_software }}' to /tmp"
+  copy:
+    src: ../../files/{{ pce_rpm_software }}
+    dest: /tmp
+  when: pce_rpm_software != '' and not file_exist.stat.exists
+
+- name: "Stopped PCE Cluster"
+  command: sudo -u ilo-pce illumio-pce-ctl status
+  register: pce_status
+  failed_when: pce_status.rc != 0
