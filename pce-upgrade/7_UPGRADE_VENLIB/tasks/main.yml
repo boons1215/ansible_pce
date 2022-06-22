@@ -28,6 +28,7 @@
   register: install_ven
   failed_when: install_ven.rc > 0
   until: install_ven.rc == 0
+  ignore_errors: True
 
 - name: "Validation: Login with Username and Password"
   uri:
