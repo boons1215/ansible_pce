@@ -5,7 +5,7 @@
     dest: /var/lib/illumio-pce/cert/server.crt
     owner: root
     group: root
-    mode: 0640
+    mode: 0644
 
 - name: "Copy cert bundle to /var/lib/illumio-pce/cert/, rename to server.key"
   copy:
@@ -13,7 +13,7 @@
     dest: /var/lib/illumio-pce/cert/server.key
     owner: root
     group: root
-    mode: 0640
+    mode: 0644
 
 - name: "Set node hostname which defined in the host inventory"
   ansible.builtin.hostname:

@@ -20,7 +20,7 @@
   - Latest release compatibility tar
 
 
-3# . Update the var files accordingly:
+# 3. Update the var files accordingly:
 - For new cluster setup, update "setup-vars.yml" file.
 - For upgrade cluster, update "upgrade-vars.yml" file.
 
