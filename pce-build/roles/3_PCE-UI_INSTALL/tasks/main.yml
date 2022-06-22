@@ -1,0 +1,22 @@
+---
+- name: "Check RPM file - '{{ pce_ui_rpm_software }}' already copied"
+  stat:
+    path: /tmp/{{ pce_ui_rpm_software }}
+  register: file_exist
+
+- name: "Copy PCE-UI RPM - '{{ pce_ui_rpm_software }}' to /tmp"
+  copy:
+    src: ../../files/{{ pce_ui_rpm_software }}
+    dest: /tmp
+  when: pce_ui_rpm_software != '' and not file_exist.stat.exists
+
+- name: "Install PCE-UI RPM - '{{ pce_ui_rpm_software }}'"
+  yum:
+    name: "/tmp/{{ pce_ui_rpm_software }}"
+    state: latest
+
+- name: "Make sure PCE-UI RPM has installed"
+  command: rpm -q illumio-pce-ui
+  register: illumio_installed
+  failed_when: illumio_installed.rc != 0
+  changed_when: False

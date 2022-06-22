@@ -1,0 +1,22 @@
+---
+- name: "Initialize the PCE database"
+  command: sudo -u ilo-pce illumio-pce-db-management setup
+  register: db_status
+  until: db_status.rc == 0
+  failed_when: db_status.rc > 1
+  retries: 2
+  delay: 10
+
+- name: "Bring the system up to runlevel 5"
+  command: sudo -u ilo-pce illumio-pce-ctl set-runlevel 5
+  register: uplevel5
+  changed_when: False
+  failed_when: uplevel5.rc != 0
+
+- name: "Wait for the PCE cluster to be up"
+  command: sudo -u ilo-pce illumio-pce-ctl cluster-status -x -w
+  register: status
+  until: status.rc == 0
+  failed_when: status.rc > 2
+  retries: 3
+  delay: 10
