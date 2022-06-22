@@ -14,7 +14,7 @@
   "timezone": "Asia/Singapore", # Asia/Tokyo, Australia/Sydney
   "pce_fqdn_name": "pce",
   "pce_domain_name": "illumioeval.com",
-  "cluster_type": "4node_v0", # 6node_v0
+  "cluster_type": "6node_v0", # 6node_v0, 4node_v0
   "front_end_management_https_port": "9443", # default 8443
   "core0_hostname": "c0",
   "service_discovery_encryption_key": "NKTBablYq3aWz0Pjvw9nGQ==",

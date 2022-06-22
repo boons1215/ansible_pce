@@ -1,7 +1,7 @@
 {
   # Remember to copy the files to pce-upgrade/files
   "ven_compatibility_matrix": "illumio-release-compatibility-20-186.tar.bz2",
-  "pce_rpm_software": "illumio-pce-21.5.30-1155.c6.x86_64.rpm",
+  "pce_rpm_software": "illumio-pce-21.5.30-1155.c8.x86_64.rpm",
   "pce_ui_rpm_software": "illumio-pce-ui-21.5.30.UI1-690.x86_64.rpm",
   "ven_bundle_software": "illumio-ven-bundle-21.5.30-8527.tar.bz2",
 

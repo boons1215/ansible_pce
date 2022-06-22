@@ -63,6 +63,7 @@
     name: ntpd
     state: restarted
     enabled: True
+  ignore_errors: True
 
 - name: "Make sure Chrony is started up"
   service:
@@ -88,6 +89,7 @@
   yum:
     name: "/tmp/{{ pce_rpm_software }}"
     state: latest
+    disable_gpg_check: yes
 
 - name: "Make sure PCE RPM has installed"
   command: rpm -q illumio-pce

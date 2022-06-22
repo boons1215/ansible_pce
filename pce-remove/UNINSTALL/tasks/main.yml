@@ -1,15 +1,14 @@
 ---
 - block:
     - name: "Stopping PCE"
-      command: illumio-pce-ctl stop
+      command: sudo -u ilo-pce illumio-pce-ctl stop
 
     - name: "Waiting for PCE to stop"
-      command: illumio-pce-ctl status -w 180
+      command: sudo -u ilo-pce illumio-pce-ctl status -w 180
       register: pce_status
       until: pce_status.rc == 0
       retries: 0
   become: true
-  become_user: ilo-pce
 
 - block:
     - name: "Uninstall the UI RPM"

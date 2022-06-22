@@ -6,8 +6,9 @@
   when: ansible_facts['distribution'] == "RedHat" or ansible_facts['distribution'] == "CentOS"
 - assert:
     that:
-      (ansible_facts['distribution'] == "RedHat" and ansible_distribution_version is version('7.4', '>=')) or
-      (ansible_facts['distribution'] == "CentOS" and ansible_distribution_version is version('7.9', '<='))
+      (ansible_facts['distribution'] == "RedHat" and ansible_distribution_major_version == "7" and ansible_distribution_version is version('7.4', '>=')) or
+      (ansible_facts['distribution'] == "RedHat" and ansible_distribution_major_version == "8" and ansible_distribution_version is version('8.6', '<=')) or
+      (ansible_facts['distribution'] == "CentOS" and ansible_distribution_major_version == "7" and ansible_distribution_version is version('7.9', '<='))
     fail_msg: OS version is not supported!
     success_msg: "{{ ansible_distribution }} {{ ansible_distribution_version }} is supported"
 

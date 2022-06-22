@@ -1,0 +1,650 @@
+❯ ansible-playbook -i hosts pce-build/site.yml -u ec2-user --private-key wwest-default -e "@setup-vars.yml"
+
+PLAY [>>>>>>>> ALL NODES: Check OS version and package dependencies] **********************************************************************************************************************************************
+
+TASK [Gathering Facts] ********************************************************************************************************************************************************************************************
+ok: [172.16.3.247]
+ok: [172.16.3.249]
+ok: [172.16.3.248]
+ok: [172.16.3.252]
+ok: [172.16.3.254]
+ok: [172.16.3.251]
+
+TASK [1_COMMON : Check OS version on nodes] ***********************************************************************************************************************************************************************
+ok: [172.16.3.247]
+ok: [172.16.3.248]
+ok: [172.16.3.249]
+ok: [172.16.3.254]
+ok: [172.16.3.252]
+ok: [172.16.3.251]
+
+TASK [1_COMMON : assert] ******************************************************************************************************************************************************************************************
+ok: [172.16.3.247] => {
+    "changed": false,
+    "msg": "RedHat 8.6 is supported"
+}
+ok: [172.16.3.248] => {
+    "changed": false,
+    "msg": "RedHat 8.6 is supported"
+}
+ok: [172.16.3.252] => {
+    "changed": false,
+    "msg": "RedHat 8.6 is supported"
+}
+ok: [172.16.3.254] => {
+    "changed": false,
+    "msg": "RedHat 8.6 is supported"
+}
+ok: [172.16.3.249] => {
+    "changed": false,
+    "msg": "RedHat 8.6 is supported"
+}
+ok: [172.16.3.251] => {
+    "changed": false,
+    "msg": "RedHat 8.6 is supported"
+}
+
+TASK [1_COMMON : Check and install package dependencies] **********************************************************************************************************************************************************
+ok: [172.16.3.247] => (item=bash)
+ok: [172.16.3.248] => (item=bash)
+ok: [172.16.3.249] => (item=bash)
+ok: [172.16.3.249] => (item=bind-utils)
+ok: [172.16.3.247] => (item=bind-utils)
+ok: [172.16.3.248] => (item=bind-utils)
+ok: [172.16.3.249] => (item=bzip2)
+ok: [172.16.3.247] => (item=bzip2)
+ok: [172.16.3.248] => (item=bzip2)
+ok: [172.16.3.249] => (item=ca-certificates)
+ok: [172.16.3.248] => (item=ca-certificates)
+ok: [172.16.3.247] => (item=ca-certificates)
+ok: [172.16.3.248] => (item=chkconfig)
+ok: [172.16.3.249] => (item=chkconfig)
+ok: [172.16.3.247] => (item=chkconfig)
+ok: [172.16.3.248] => (item=coreutils)
+ok: [172.16.3.247] => (item=coreutils)
+ok: [172.16.3.249] => (item=coreutils)
+ok: [172.16.3.254] => (item=bash)
+ok: [172.16.3.248] => (item=curl)
+ok: [172.16.3.252] => (item=bash)
+ok: [172.16.3.247] => (item=curl)
+ok: [172.16.3.249] => (item=curl)
+ok: [172.16.3.248] => (item=findutils)
+ok: [172.16.3.247] => (item=findutils)
+ok: [172.16.3.249] => (item=findutils)
+changed: [172.16.3.254] => (item=bind-utils)
+changed: [172.16.3.252] => (item=bind-utils)
+ok: [172.16.3.248] => (item=gawk)
+ok: [172.16.3.247] => (item=gawk)
+ok: [172.16.3.249] => (item=gawk)
+changed: [172.16.3.254] => (item=bzip2)
+changed: [172.16.3.252] => (item=bzip2)
+ok: [172.16.3.248] => (item=grep)
+ok: [172.16.3.247] => (item=grep)
+ok: [172.16.3.249] => (item=grep)
+ok: [172.16.3.254] => (item=ca-certificates)
+ok: [172.16.3.252] => (item=ca-certificates)
+ok: [172.16.3.247] => (item=gzip)
+ok: [172.16.3.248] => (item=gzip)
+ok: [172.16.3.249] => (item=gzip)
+ok: [172.16.3.254] => (item=chkconfig)
+ok: [172.16.3.252] => (item=chkconfig)
+^@ok: [172.16.3.247] => (item=initscripts)
+ok: [172.16.3.248] => (item=initscripts)
+ok: [172.16.3.249] => (item=initscripts)
+ok: [172.16.3.254] => (item=coreutils)
+ok: [172.16.3.252] => (item=coreutils)
+ok: [172.16.3.248] => (item=libuuid)
+ok: [172.16.3.247] => (item=libuuid)
+ok: [172.16.3.249] => (item=libuuid)
+ok: [172.16.3.254] => (item=curl)
+ok: [172.16.3.252] => (item=curl)
+ok: [172.16.3.247] => (item=logrotate)
+ok: [172.16.3.248] => (item=logrotate)
+ok: [172.16.3.249] => (item=logrotate)
+ok: [172.16.3.254] => (item=findutils)
+ok: [172.16.3.252] => (item=findutils)
+ok: [172.16.3.247] => (item=net-tools)
+ok: [172.16.3.248] => (item=net-tools)
+ok: [172.16.3.249] => (item=net-tools)
+ok: [172.16.3.254] => (item=gawk)
+ok: [172.16.3.252] => (item=gawk)
+ok: [172.16.3.248] => (item=procps-ng)
+ok: [172.16.3.249] => (item=procps-ng)
+ok: [172.16.3.247] => (item=procps-ng)
+ok: [172.16.3.254] => (item=grep)
+ok: [172.16.3.252] => (item=grep)
+ok: [172.16.3.248] => (item=sed)
+ok: [172.16.3.247] => (item=sed)
+ok: [172.16.3.249] => (item=sed)
+ok: [172.16.3.254] => (item=gzip)
+ok: [172.16.3.252] => (item=gzip)
+ok: [172.16.3.248] => (item=tar)
+ok: [172.16.3.247] => (item=tar)
+ok: [172.16.3.249] => (item=tar)
+ok: [172.16.3.254] => (item=initscripts)
+ok: [172.16.3.252] => (item=initscripts)
+ok: [172.16.3.247] => (item=util-linux)
+ok: [172.16.3.248] => (item=util-linux)
+ok: [172.16.3.249] => (item=util-linux)
+ok: [172.16.3.254] => (item=libuuid)
+ok: [172.16.3.252] => (item=libuuid)
+ok: [172.16.3.251] => (item=bash)
+ok: [172.16.3.254] => (item=logrotate)
+ok: [172.16.3.252] => (item=logrotate)
+ok: [172.16.3.251] => (item=bind-utils)
+changed: [172.16.3.254] => (item=net-tools)
+ok: [172.16.3.251] => (item=bzip2)
+changed: [172.16.3.252] => (item=net-tools)
+ok: [172.16.3.254] => (item=procps-ng)
+^@ok: [172.16.3.252] => (item=procps-ng)
+ok: [172.16.3.251] => (item=ca-certificates)
+ok: [172.16.3.254] => (item=sed)
+ok: [172.16.3.251] => (item=chkconfig)
+ok: [172.16.3.252] => (item=sed)
+ok: [172.16.3.254] => (item=tar)
+ok: [172.16.3.252] => (item=tar)
+ok: [172.16.3.251] => (item=coreutils)
+ok: [172.16.3.254] => (item=util-linux)
+ok: [172.16.3.252] => (item=util-linux)
+ok: [172.16.3.251] => (item=curl)
+ok: [172.16.3.251] => (item=findutils)
+ok: [172.16.3.251] => (item=gawk)
+ok: [172.16.3.251] => (item=grep)
+ok: [172.16.3.251] => (item=gzip)
+ok: [172.16.3.251] => (item=initscripts)
+ok: [172.16.3.251] => (item=libuuid)
+ok: [172.16.3.251] => (item=logrotate)
+^@ok: [172.16.3.251] => (item=net-tools)
+ok: [172.16.3.251] => (item=procps-ng)
+ok: [172.16.3.251] => (item=sed)
+ok: [172.16.3.251] => (item=tar)
+ok: [172.16.3.251] => (item=util-linux)
+
+TASK [1_COMMON : Check and install lib dependencies] **************************************************************************************************************************************************************
+ok: [172.16.3.247] => (item=glibc)
+ok: [172.16.3.254] => (item=glibc)
+ok: [172.16.3.249] => (item=glibc)
+ok: [172.16.3.248] => (item=glibc)
+ok: [172.16.3.252] => (item=glibc)
+ok: [172.16.3.254] => (item=libgcc)
+ok: [172.16.3.247] => (item=libgcc)
+ok: [172.16.3.249] => (item=libgcc)
+ok: [172.16.3.248] => (item=libgcc)
+ok: [172.16.3.252] => (item=libgcc)
+ok: [172.16.3.254] => (item=libselinux)
+ok: [172.16.3.247] => (item=libselinux)
+ok: [172.16.3.248] => (item=libselinux)
+ok: [172.16.3.249] => (item=libselinux)
+ok: [172.16.3.252] => (item=libselinux)
+ok: [172.16.3.254] => (item=libstdc++)
+ok: [172.16.3.247] => (item=libstdc++)
+ok: [172.16.3.249] => (item=libstdc++)
+ok: [172.16.3.248] => (item=libstdc++)
+ok: [172.16.3.252] => (item=libstdc++)
+ok: [172.16.3.254] => (item=ncurses-libs)
+ok: [172.16.3.247] => (item=ncurses-libs)
+ok: [172.16.3.249] => (item=ncurses-libs)
+ok: [172.16.3.248] => (item=ncurses-libs)
+ok: [172.16.3.252] => (item=ncurses-libs)
+^@ok: [172.16.3.254] => (item=openssl)
+ok: [172.16.3.247] => (item=openssl)
+ok: [172.16.3.249] => (item=openssl)
+ok: [172.16.3.248] => (item=openssl)
+ok: [172.16.3.252] => (item=openssl)
+ok: [172.16.3.254] => (item=readline)
+ok: [172.16.3.247] => (item=readline)
+ok: [172.16.3.248] => (item=readline)
+ok: [172.16.3.249] => (item=readline)
+ok: [172.16.3.252] => (item=readline)
+ok: [172.16.3.254] => (item=shadow-utils)
+ok: [172.16.3.247] => (item=shadow-utils)
+ok: [172.16.3.248] => (item=shadow-utils)
+ok: [172.16.3.249] => (item=shadow-utils)
+ok: [172.16.3.252] => (item=shadow-utils)
+ok: [172.16.3.254] => (item=zlib)
+ok: [172.16.3.247] => (item=zlib)
+ok: [172.16.3.248] => (item=zlib)
+ok: [172.16.3.249] => (item=zlib)
+ok: [172.16.3.252] => (item=zlib)
+ok: [172.16.3.251] => (item=glibc)
+ok: [172.16.3.251] => (item=libgcc)
+ok: [172.16.3.251] => (item=libselinux)
+ok: [172.16.3.251] => (item=libstdc++)
+ok: [172.16.3.251] => (item=ncurses-libs)
+ok: [172.16.3.251] => (item=openssl)
+ok: [172.16.3.251] => (item=readline)
+^@ok: [172.16.3.251] => (item=shadow-utils)
+ok: [172.16.3.251] => (item=zlib)
+
+PLAY [>>>>>>>> ALL NODES: Install PCE RPM, set hostname, stop firewalld, copy certs, set locale and enable ntp] ***************************************************************************************************
+
+TASK [2_INIT : Stop iptables service] *****************************************************************************************************************************************************************************
+fatal: [172.16.3.249]: FAILED! => {"changed": false, "msg": "Could not find the requested service iptables: host"}
+...ignoring
+fatal: [172.16.3.254]: FAILED! => {"changed": false, "msg": "Could not find the requested service iptables: host"}
+...ignoring
+fatal: [172.16.3.248]: FAILED! => {"changed": false, "msg": "Could not find the requested service iptables: host"}
+...ignoring
+fatal: [172.16.3.252]: FAILED! => {"changed": false, "msg": "Could not find the requested service iptables: host"}
+...ignoring
+fatal: [172.16.3.247]: FAILED! => {"changed": false, "msg": "Could not find the requested service iptables: host"}
+...ignoring
+fatal: [172.16.3.251]: FAILED! => {"changed": false, "msg": "Could not find the requested service iptables: host"}
+...ignoring
+
+TASK [2_INIT : Stop firewalld service] ****************************************************************************************************************************************************************************
+fatal: [172.16.3.247]: FAILED! => {"changed": false, "msg": "Could not find the requested service firewalld: host"}
+...ignoring
+fatal: [172.16.3.252]: FAILED! => {"changed": false, "msg": "Could not find the requested service firewalld: host"}
+...ignoring
+fatal: [172.16.3.248]: FAILED! => {"changed": false, "msg": "Could not find the requested service firewalld: host"}
+...ignoring
+fatal: [172.16.3.254]: FAILED! => {"changed": false, "msg": "Could not find the requested service firewalld: host"}
+...ignoring
+fatal: [172.16.3.249]: FAILED! => {"changed": false, "msg": "Could not find the requested service firewalld: host"}
+...ignoring
+fatal: [172.16.3.251]: FAILED! => {"changed": false, "msg": "Could not find the requested service firewalld: host"}
+...ignoring
+
+TASK [2_INIT : Put SELinux in permissive mode] ********************************************************************************************************************************************************************
+ok: [172.16.3.247]
+ok: [172.16.3.248]
+ok: [172.16.3.249]
+changed: [172.16.3.254]
+changed: [172.16.3.252]
+ok: [172.16.3.251]
+
+TASK [2_INIT : Get current locale and language configuration] *****************************************************************************************************************************************************
+ok: [172.16.3.247]
+ok: [172.16.3.254]
+ok: [172.16.3.249]
+ok: [172.16.3.252]
+ok: [172.16.3.248]
+ok: [172.16.3.251]
+
+TASK [2_INIT : Parse 'LANG' from current locale and language configuration] ***************************************************************************************************************************************
+ok: [172.16.3.247]
+ok: [172.16.3.248]
+ok: [172.16.3.252]
+ok: [172.16.3.254]
+ok: [172.16.3.249]
+ok: [172.16.3.251]
+
+TASK [2_INIT : Configure locale to 'en_US.UTF-8'] *****************************************************************************************************************************************************************
+ok: [172.16.3.247]
+ok: [172.16.3.254]
+ok: [172.16.3.248]
+ok: [172.16.3.252]
+ok: [172.16.3.249]
+ok: [172.16.3.251]
+
+TASK [2_INIT : Set /etc/environment] ******************************************************************************************************************************************************************************
+ok: [172.16.3.247]
+changed: [172.16.3.252]
+ok: [172.16.3.249]
+ok: [172.16.3.248]
+changed: [172.16.3.254]
+ok: [172.16.3.251]
+
+TASK [2_INIT : Copy root CA certs to /etc/pki/ca-trust/source/anchors/] *******************************************************************************************************************************************
+ok: [172.16.3.247]
+ok: [172.16.3.249]
+ok: [172.16.3.248]
+changed: [172.16.3.254]
+changed: [172.16.3.252]
+ok: [172.16.3.251]
+
+TASK [2_INIT : Copy intermediate CA certs to /etc/pki/ca-trust/source/anchors/] ***********************************************************************************************************************************
+ok: [172.16.3.247]
+ok: [172.16.3.248]
+ok: [172.16.3.249]
+changed: [172.16.3.252]
+changed: [172.16.3.254]
+^@ok: [172.16.3.251]
+
+TASK [2_INIT : Update-ca-trust force-enable] **********************************************************************************************************************************************************************
+changed: [172.16.3.247]
+changed: [172.16.3.248]
+changed: [172.16.3.249]
+changed: [172.16.3.254]
+changed: [172.16.3.252]
+changed: [172.16.3.251]
+
+TASK [2_INIT : Update-ca-trust extract] ***************************************************************************************************************************************************************************
+changed: [172.16.3.252]
+changed: [172.16.3.248]
+changed: [172.16.3.254]
+changed: [172.16.3.247]
+changed: [172.16.3.249]
+changed: [172.16.3.251]
+
+TASK [2_INIT : Ensure NTP service is enabled (use default in /etc/ntp.conf)] **************************************************************************************************************************************
+fatal: [172.16.3.247]: FAILED! => {"changed": false, "msg": "Could not find the requested service ntpd: host"}
+...ignoring
+fatal: [172.16.3.254]: FAILED! => {"changed": false, "msg": "Could not find the requested service ntpd: host"}
+...ignoring
+fatal: [172.16.3.248]: FAILED! => {"changed": false, "msg": "Could not find the requested service ntpd: host"}
+...ignoring
+fatal: [172.16.3.249]: FAILED! => {"changed": false, "msg": "Could not find the requested service ntpd: host"}
+...ignoring
+fatal: [172.16.3.252]: FAILED! => {"changed": false, "msg": "Could not find the requested service ntpd: host"}
+...ignoring
+fatal: [172.16.3.251]: FAILED! => {"changed": false, "msg": "Could not find the requested service ntpd: host"}
+...ignoring
+
+TASK [2_INIT : Make sure Chrony is started up] ********************************************************************************************************************************************************************
+ok: [172.16.3.247]
+ok: [172.16.3.254]
+ok: [172.16.3.249]
+ok: [172.16.3.248]
+ok: [172.16.3.252]
+ok: [172.16.3.251]
+
+TASK [2_INIT : Set timezone 'Asia/Singapore'] *********************************************************************************************************************************************************************
+changed: [172.16.3.248]
+changed: [172.16.3.247]
+changed: [172.16.3.252]
+changed: [172.16.3.254]
+changed: [172.16.3.249]
+changed: [172.16.3.251]
+
+TASK [2_INIT : Check RPM file - 'illumio-pce-21.2.7-656.c8.x86_64.rpm' already copied] ****************************************************************************************************************************
+ok: [172.16.3.254]
+ok: [172.16.3.252]
+ok: [172.16.3.247]
+ok: [172.16.3.248]
+ok: [172.16.3.249]
+ok: [172.16.3.251]
+
+TASK [2_INIT : Copy PCE RPM - 'illumio-pce-21.2.7-656.c8.x86_64.rpm' to /tmp] *************************************************************************************************************************************
+skipping: [172.16.3.247]
+skipping: [172.16.3.248]
+skipping: [172.16.3.249]
+skipping: [172.16.3.251]
+^@changed: [172.16.3.252]
+changed: [172.16.3.254]
+
+TASK [2_INIT : Install PCE RPM - 'illumio-pce-21.2.7-656.c8.x86_64.rpm'] ******************************************************************************************************************************************
+changed: [172.16.3.247]
+changed: [172.16.3.248]
+changed: [172.16.3.249]
+changed: [172.16.3.254]
+changed: [172.16.3.252]
+^@changed: [172.16.3.251]
+
+TASK [2_INIT : Make sure PCE RPM has installed] *******************************************************************************************************************************************************************
+ok: [172.16.3.247]
+ok: [172.16.3.248]
+ok: [172.16.3.249]
+ok: [172.16.3.254]
+ok: [172.16.3.252]
+ok: [172.16.3.251]
+
+PLAY [>>>>>>>> CORE NODES: Install PCE-UI RPM] ********************************************************************************************************************************************************************
+
+TASK [3_PCE-UI_INSTALL : Check RPM file - 'illumio-pce-ui-21.2.7.UI1-284.x86_64.rpm' already copied] **************************************************************************************************************
+ok: [172.16.3.247]
+ok: [172.16.3.254]
+ok: [172.16.3.252]
+ok: [172.16.3.248]
+
+TASK [3_PCE-UI_INSTALL : Copy PCE-UI RPM - 'illumio-pce-ui-21.2.7.UI1-284.x86_64.rpm' to /tmp] ********************************************************************************************************************
+skipping: [172.16.3.247]
+skipping: [172.16.3.248]
+changed: [172.16.3.254]
+changed: [172.16.3.252]
+
+TASK [3_PCE-UI_INSTALL : Install PCE-UI RPM - 'illumio-pce-ui-21.2.7.UI1-284.x86_64.rpm'] *************************************************************************************************************************
+changed: [172.16.3.254]
+changed: [172.16.3.247]
+changed: [172.16.3.248]
+changed: [172.16.3.252]
+
+TASK [3_PCE-UI_INSTALL : Make sure PCE-UI RPM has installed] ******************************************************************************************************************************************************
+ok: [172.16.3.247]
+ok: [172.16.3.254]
+ok: [172.16.3.252]
+ok: [172.16.3.248]
+
+PLAY [>>>>>>>> ALL NODES: Set and Verify Process and File Limits with systemd] ************************************************************************************************************************************
+
+TASK [4_SET_SYSTEMD : Create /etc/systemd/system/illumio-pce.service.d/override.conf] *****************************************************************************************************************************
+changed: [172.16.3.247]
+changed: [172.16.3.252]
+changed: [172.16.3.248]
+changed: [172.16.3.254]
+changed: [172.16.3.249]
+changed: [172.16.3.251]
+
+TASK [4_SET_SYSTEMD : Set systemd limits] *************************************************************************************************************************************************************************
+changed: [172.16.3.248]
+changed: [172.16.3.247]
+changed: [172.16.3.252]
+changed: [172.16.3.254]
+changed: [172.16.3.249]
+changed: [172.16.3.251]
+
+PLAY [>>>>>>>> CORE NODES: Set OS kernel parameters] **************************************************************************************************************************************************************
+
+TASK [5_SET_KERNEL_CORE : Create /etc/sysctl.d/99-illumio.conf] ***************************************************************************************************************************************************
+^@changed: [172.16.3.247]
+changed: [172.16.3.248]
+changed: [172.16.3.254]
+changed: [172.16.3.252]
+
+TASK [5_SET_KERNEL_CORE : Load nf_conntrack module] ***************************************************************************************************************************************************************
+changed: [172.16.3.247]
+changed: [172.16.3.248]
+changed: [172.16.3.254]
+changed: [172.16.3.252]
+
+TASK [5_SET_KERNEL_CORE : Set OS kernel parameters] ***************************************************************************************************************************************************************
+ok: [172.16.3.247]
+ok: [172.16.3.248]
+changed: [172.16.3.254]
+changed: [172.16.3.252]
+
+TASK [5_SET_KERNEL_CORE : Apply the OS kernel settings] ***********************************************************************************************************************************************************
+changed: [172.16.3.247]
+changed: [172.16.3.254]
+changed: [172.16.3.252]
+changed: [172.16.3.248]
+
+TASK [5_SET_KERNEL_CORE : Get current nf_conntrack hashsize] ******************************************************************************************************************************************************
+ok: [172.16.3.247]
+ok: [172.16.3.254]
+ok: [172.16.3.248]
+ok: [172.16.3.252]
+
+TASK [5_SET_KERNEL_CORE : Set nf_conntrack hashsize to 262144] ****************************************************************************************************************************************************
+skipping: [172.16.3.247]
+skipping: [172.16.3.248]
+changed: [172.16.3.252]
+changed: [172.16.3.254]
+
+TASK [5_SET_KERNEL_CORE : Create /etc/modprobe.d/illumio.conf] ****************************************************************************************************************************************************
+changed: [172.16.3.247]
+changed: [172.16.3.248]
+changed: [172.16.3.254]
+changed: [172.16.3.252]
+
+TASK [5_SET_KERNEL_CORE : Apply the hash size settings in module] *************************************************************************************************************************************************
+ok: [172.16.3.247]
+ok: [172.16.3.248]
+changed: [172.16.3.252]
+changed: [172.16.3.254]
+
+PLAY [>>>>>>>> DATA NODES: Set OS kernel parameters] **************************************************************************************************************************************************************
+
+TASK [6_SET_KERNEL_DATA : Create /etc/sysctl.d/99-illumio.conf] ***************************************************************************************************************************************************
+changed: [172.16.3.249]
+changed: [172.16.3.251]
+
+TASK [6_SET_KERNEL_DATA : Set OS kernel parameters] ***************************************************************************************************************************************************************
+ok: [172.16.3.249]
+ok: [172.16.3.251]
+
+TASK [6_SET_KERNEL_DATA : Apply the settings] *********************************************************************************************************************************************************************
+changed: [172.16.3.251]
+changed: [172.16.3.249]
+
+PLAY [>>>>>>>> ALL NODES: PCE cluster setup] **********************************************************************************************************************************************************************
+
+TASK [7_CLUSTER_SETUP : Copy private key to /var/lib/illumio-pce/cert/, rename to server.crt] *********************************************************************************************************************
+changed: [172.16.3.247]
+changed: [172.16.3.254]
+changed: [172.16.3.248]
+changed: [172.16.3.249]
+changed: [172.16.3.252]
+changed: [172.16.3.251]
+
+TASK [7_CLUSTER_SETUP : Copy cert bundle to /var/lib/illumio-pce/cert/, rename to server.key] *********************************************************************************************************************
+changed: [172.16.3.247]
+changed: [172.16.3.248]
+changed: [172.16.3.254]
+changed: [172.16.3.249]
+changed: [172.16.3.252]
+changed: [172.16.3.251]
+
+TASK [7_CLUSTER_SETUP : Set node hostname which defined in the host inventory] ************************************************************************************************************************************
+ok: [172.16.3.247]
+ok: [172.16.3.248]
+ok: [172.16.3.249]
+changed: [172.16.3.254]
+changed: [172.16.3.252]
+ok: [172.16.3.251]
+
+TASK [7_CLUSTER_SETUP : Update /etc/hosts to include all nodes] ***************************************************************************************************************************************************
+changed: [172.16.3.247]
+changed: [172.16.3.249]
+changed: [172.16.3.254]
+changed: [172.16.3.248]
+changed: [172.16.3.252]
+changed: [172.16.3.251]
+
+TASK [7_CLUSTER_SETUP : Set fact variable - node type 'core'] *****************************************************************************************************************************************************
+skipping: [172.16.3.247] => (item=allnodes)
+ok: [172.16.3.247] => (item=core0)
+skipping: [172.16.3.247] => (item=corenodes)
+skipping: [172.16.3.248] => (item=allnodes)
+ok: [172.16.3.248] => (item=core1)
+skipping: [172.16.3.248] => (item=corenodes)
+skipping: [172.16.3.252] => (item=allnodes)
+ok: [172.16.3.252] => (item=core2)
+skipping: [172.16.3.252] => (item=corenodes)
+skipping: [172.16.3.254] => (item=allnodes)
+^@ok: [172.16.3.254] => (item=core3)
+skipping: [172.16.3.254] => (item=corenodes)
+skipping: [172.16.3.249] => (item=allnodes)
+skipping: [172.16.3.249] => (item=data0)
+skipping: [172.16.3.249] => (item=datanodes)
+skipping: [172.16.3.251] => (item=allnodes)
+skipping: [172.16.3.251] => (item=data1)
+skipping: [172.16.3.251] => (item=datanodes)
+
+TASK [7_CLUSTER_SETUP : Set fact variable - node type 'data'] *****************************************************************************************************************************************************
+skipping: [172.16.3.247] => (item=allnodes)
+skipping: [172.16.3.247] => (item=core0)
+skipping: [172.16.3.247] => (item=corenodes)
+skipping: [172.16.3.248] => (item=allnodes)
+skipping: [172.16.3.248] => (item=core1)
+skipping: [172.16.3.248] => (item=corenodes)
+skipping: [172.16.3.252] => (item=allnodes)
+skipping: [172.16.3.252] => (item=core2)
+skipping: [172.16.3.252] => (item=corenodes)
+skipping: [172.16.3.254] => (item=allnodes)
+skipping: [172.16.3.254] => (item=core3)
+skipping: [172.16.3.254] => (item=corenodes)
+skipping: [172.16.3.249] => (item=allnodes)
+ok: [172.16.3.249] => (item=data0)
+skipping: [172.16.3.249] => (item=datanodes)
+skipping: [172.16.3.251] => (item=allnodes)
+ok: [172.16.3.251] => (item=data1)
+skipping: [172.16.3.251] => (item=datanodes)
+
+TASK [7_CLUSTER_SETUP : Copy runtime_env.yml template to PCE] *****************************************************************************************************************************************************
+changed: [172.16.3.247]
+changed: [172.16.3.254]
+changed: [172.16.3.249]
+changed: [172.16.3.252]
+changed: [172.16.3.248]
+changed: [172.16.3.251]
+
+TASK [7_CLUSTER_SETUP : Running illumio-pce-env check before starting cluster] ************************************************************************************************************************************
+ok: [172.16.3.247]
+ok: [172.16.3.248]
+ok: [172.16.3.249]
+ok: [172.16.3.254]
+ok: [172.16.3.252]
+ok: [172.16.3.251]
+
+TASK [7_CLUSTER_SETUP : Running illumio-pce-ctl status to check init runlevel] ************************************************************************************************************************************
+ok: [172.16.3.247]
+ok: [172.16.3.248]
+ok: [172.16.3.254]
+ok: [172.16.3.249]
+ok: [172.16.3.252]
+ok: [172.16.3.251]
+
+TASK [7_CLUSTER_SETUP : Start PCE runlevel 1] *********************************************************************************************************************************************************************
+changed: [172.16.3.249]
+changed: [172.16.3.254]
+changed: [172.16.3.247]
+changed: [172.16.3.248]
+changed: [172.16.3.252]
+changed: [172.16.3.251]
+
+TASK [7_CLUSTER_SETUP : Wait for the PCE to start as runlevel 1] **************************************************************************************************************************************************
+FAILED - RETRYING: Wait for the PCE to start as runlevel 1 (3 retries left).
+FAILED - RETRYING: Wait for the PCE to start as runlevel 1 (3 retries left).
+FAILED - RETRYING: Wait for the PCE to start as runlevel 1 (3 retries left).
+FAILED - RETRYING: Wait for the PCE to start as runlevel 1 (3 retries left).
+FAILED - RETRYING: Wait for the PCE to start as runlevel 1 (3 retries left).
+^@^@changed: [172.16.3.248]
+changed: [172.16.3.254]
+changed: [172.16.3.252]
+changed: [172.16.3.251]
+changed: [172.16.3.247]
+changed: [172.16.3.249]
+
+PLAY [>>>>>>>> DATA 0: Bring up DB and set runlevel 5] ************************************************************************************************************************************************************
+
+TASK [8_INIT_DB : Initialize the PCE database] ********************************************************************************************************************************************************************
+^@changed: [172.16.3.249]
+
+TASK [8_INIT_DB : Bring the system up to runlevel 5] **************************************************************************************************************************************************************
+ok: [172.16.3.249]
+
+TASK [8_INIT_DB : Wait for the PCE cluster to be up] **************************************************************************************************************************************************************
+^@changed: [172.16.3.249]
+
+PLAY [>>>>>>>> CORE 0: Setup first local user, install VEN library bundle and validate the cluster service] *******************************************************************************************************
+
+TASK [9_SET_USER_VENLIB : Creating org and adding first user with illumio-pce-db-management] **********************************************************************************************************************
+^@changed: [172.16.3.247]
+
+TASK [9_SET_USER_VENLIB : Copy VEN bundle - 'illumio-ven-bundle-21.2.5-8017.tar.bz2' to /tmp] *********************************************************************************************************************
+ok: [172.16.3.247]
+
+TASK [9_SET_USER_VENLIB : Check VEN bundle - 'illumio-ven-bundle-21.2.5-8017.tar.bz2' already copied] *************************************************************************************************************
+ok: [172.16.3.247]
+
+TASK [9_SET_USER_VENLIB : Copy VEN compatibility matrix - 'illumio-release-compatibility-20-186.tar.bz2' to /tmp] *************************************************************************************************
+ok: [172.16.3.247]
+
+TASK [9_SET_USER_VENLIB : Check VEN compatibility matrix - 'illumio-release-compatibility-20-186.tar.bz2' already copied] *****************************************************************************************
+ok: [172.16.3.247]
+
+TASK [9_SET_USER_VENLIB : Install VEN bundle] *********************************************************************************************************************************************************************
+^@^@changed: [172.16.3.247]
+
+TASK [9_SET_USER_VENLIB : Validation: Login with Username and Password] *******************************************************************************************************************************************
+ok: [172.16.3.247]
+
+PLAY RECAP ********************************************************************************************************************************************************************************************************
+172.16.3.247               : ok=51   changed=19   unreachable=0    failed=0    skipped=4    rescued=0    ignored=3
+172.16.3.248               : ok=44   changed=17   unreachable=0    failed=0    skipped=4    rescued=0    ignored=3
+172.16.3.249               : ok=40   changed=16   unreachable=0    failed=0    skipped=2    rescued=0    ignored=3
+172.16.3.251               : ok=37   changed=14   unreachable=0    failed=0    skipped=2    rescued=0    ignored=3
+172.16.3.252               : ok=47   changed=28   unreachable=0    failed=0    skipped=1    rescued=0    ignored=3
+172.16.3.254               : ok=47   changed=28   unreachable=0    failed=0    skipped=1    rescued=0    ignored=3

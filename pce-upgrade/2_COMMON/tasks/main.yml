@@ -5,6 +5,12 @@
     dest: /tmp
   when: pce_rpm_software != ''
 
+- name: "Copy PCE-UI RPM - '{{ pce_ui_rpm_software }}' to /tmp"
+  copy:
+    src: ../../files/{{ pce_ui_rpm_software }}
+    dest: /tmp
+  when: pce_ui_rpm_software != ''
+
 - name: "Stopped PCE Cluster"
   command: sudo -u ilo-pce illumio-pce-ctl stop
   register: pce_status

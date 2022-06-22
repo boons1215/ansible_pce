@@ -1,5 +1,6 @@
 ---
 - name: "Upgrade PCE RPM - '{{ pce_rpm_software }}' on Data nodes"
   yum:
-    name: "/tmp/{{pce_rpm_software}}"
+    name: "/tmp/{{ pce_rpm_software }}"
     state: latest
+    disable_gpg_check: yes

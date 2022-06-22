@@ -14,6 +14,7 @@
   yum:
     name: "/tmp/{{ pce_ui_rpm_software }}"
     state: latest
+    disable_gpg_check: yes
 
 - name: "Make sure PCE-UI RPM has installed"
   command: rpm -q illumio-pce-ui

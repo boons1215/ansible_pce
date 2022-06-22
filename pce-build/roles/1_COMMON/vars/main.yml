@@ -15,7 +15,6 @@ package_dependency_names:
   - libuuid
   - logrotate
   - net-tools
-  - ntp
   - procps-ng
   - sed
   - tar

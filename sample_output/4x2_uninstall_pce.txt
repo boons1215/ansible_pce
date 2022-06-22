@@ -1,0 +1,77 @@
+❯ ansible-playbook -i hosts pce-remove/site.yml -u ec2-user --private-key wwest-default
+
+PLAY [***** ALL NODES: Uninstall and remove PCE software and files] ***********************************************************************************************************************************************
+
+TASK [Gathering Facts] ********************************************************************************************************************************************************************************************
+ok: [172.16.3.249]
+ok: [172.16.3.254]
+ok: [172.16.3.247]
+ok: [172.16.3.248]
+ok: [172.16.3.252]
+ok: [172.16.3.251]
+
+TASK [UNINSTALL : Stopping PCE] ***********************************************************************************************************************************************************************************
+changed: [172.16.3.249]
+changed: [172.16.3.248]
+changed: [172.16.3.247]
+changed: [172.16.3.254]
+changed: [172.16.3.252]
+changed: [172.16.3.251]
+
+TASK [UNINSTALL : Waiting for PCE to stop] ************************************************************************************************************************************************************************
+changed: [172.16.3.248]
+changed: [172.16.3.247]
+changed: [172.16.3.254]
+changed: [172.16.3.252]
+changed: [172.16.3.249]
+changed: [172.16.3.251]
+
+TASK [UNINSTALL : Uninstall the UI RPM] ***************************************************************************************************************************************************************************
+ok: [172.16.3.249]
+changed: [172.16.3.248]
+changed: [172.16.3.247]
+changed: [172.16.3.254]
+changed: [172.16.3.252]
+ok: [172.16.3.251]
+
+TASK [UNINSTALL : Uninstall the PCE RPM] **************************************************************************************************************************************************************************
+changed: [172.16.3.254]
+changed: [172.16.3.248]
+changed: [172.16.3.247]
+changed: [172.16.3.249]
+changed: [172.16.3.252]
+changed: [172.16.3.251]
+
+TASK [UNINSTALL : Clean up directories] ***************************************************************************************************************************************************************************
+changed: [172.16.3.254] => (item=/var/lib/illumio-pce/)
+changed: [172.16.3.247] => (item=/var/lib/illumio-pce/)
+changed: [172.16.3.248] => (item=/var/lib/illumio-pce/)
+changed: [172.16.3.252] => (item=/var/lib/illumio-pce/)
+changed: [172.16.3.249] => (item=/var/lib/illumio-pce/)
+changed: [172.16.3.254] => (item=/var/log/illumio-pce/)
+changed: [172.16.3.247] => (item=/var/log/illumio-pce/)
+changed: [172.16.3.248] => (item=/var/log/illumio-pce/)
+changed: [172.16.3.252] => (item=/var/log/illumio-pce/)
+changed: [172.16.3.249] => (item=/var/log/illumio-pce/)
+changed: [172.16.3.254] => (item=/etc/illumio-pce)
+changed: [172.16.3.247] => (item=/etc/illumio-pce)
+changed: [172.16.3.248] => (item=/etc/illumio-pce)
+changed: [172.16.3.252] => (item=/etc/illumio-pce)
+changed: [172.16.3.249] => (item=/etc/illumio-pce)
+ok: [172.16.3.247] => (item=/opt/illumio-pce)
+ok: [172.16.3.254] => (item=/opt/illumio-pce)
+ok: [172.16.3.248] => (item=/opt/illumio-pce)
+ok: [172.16.3.252] => (item=/opt/illumio-pce)
+ok: [172.16.3.249] => (item=/opt/illumio-pce)
+changed: [172.16.3.251] => (item=/var/lib/illumio-pce/)
+changed: [172.16.3.251] => (item=/var/log/illumio-pce/)
+changed: [172.16.3.251] => (item=/etc/illumio-pce)
+ok: [172.16.3.251] => (item=/opt/illumio-pce)
+
+PLAY RECAP ********************************************************************************************************************************************************************************************************
+172.16.3.247               : ok=6    changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+172.16.3.248               : ok=6    changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+172.16.3.249               : ok=6    changed=4    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+172.16.3.251               : ok=6    changed=4    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+172.16.3.252               : ok=6    changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+172.16.3.254               : ok=6    changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
