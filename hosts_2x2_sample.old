@@ -1,0 +1,33 @@
+[allnodes]
+172.16.3.232    hostname=c0
+172.16.3.233    hostname=c1
+172.16.3.209    hostname=d0
+172.16.3.210    hostname=d1
+
+[core0]
+172.16.3.232
+
+[core1]
+172.16.3.233 
+
+[core2]
+
+
+[core3]
+
+
+[corenodes:children]
+core0
+core1
+core2
+core3
+
+[data0]
+172.16.3.209
+
+[data1]
+172.16.3.210
+
+[datanodes:children]
+data0
+data1
