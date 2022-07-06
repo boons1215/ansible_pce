@@ -43,3 +43,10 @@ Eg:
 Eg:
   - With SSH Private Key: 
     - ansible-playbook -i hosts pce-build/site.yml -u centos --private-key wwest-default -e "@upgrade-vars.yml"
+    
+
+# 5. In progress....
+- PCE expansion from 2x2 to 4x2
+- PCE rollback/downgrade
+- PCE split cluster handling when core0 and data0, promoting core1 and data1 as standalone cluster
+
