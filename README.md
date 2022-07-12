@@ -49,4 +49,5 @@ Eg:
 - PCE expansion from 2x2 to 4x2
 - PCE rollback/downgrade
 - PCE split cluster handling when core0 and data0, promoting core1 and data1 as standalone cluster
+- PCE restore from backup
 
