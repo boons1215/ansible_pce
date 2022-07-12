@@ -51,4 +51,5 @@ Eg:
 - PCE split cluster handling when core0 and data0, promoting core1 and data1 as standalone cluster
 - PCE restore from backup
 - PCE data mastership failover
+- PCE switch listen-only mode
 
